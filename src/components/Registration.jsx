@@ -22,40 +22,58 @@ const Registration = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(values < 1){
+      // handleFormValidation()
+    }
   };
 
   const handleFormValidation = () => {
-    let errors = {...values.errors};
+    let error = {...values.errors};
+    // console.log(error)
     let isValid = true;
+    
     if(!values.name){
-        errors.name = "Name is required!";
+        error.name = "Name is required!";
         isValid = false;
+    } else {
+      error.name = "";
+      isValid = true;
     }
 
     if(!values.email){
-        errors.email = "Email is required!";
+        error.email = "Email is required!";
         isValid = false;
     } else if(!/\S+@\S+\.\S+/.test(values.email)){
-        errors.email = "Email is invalid!";
+        error.email = "Email is invalid!";
         isValid = false;
+    } else {
+      error.email = "";
+      isValid = true;
     }
 
     if(!values.password){
-        errors.password = "Password is required!";
+        error.password = "Password is required!";
         isValid = false;
     } else if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}/.test(values.password)){
-        errors.password = "Password must contain at least one uppercase letter, one number, and one special character";
+        error.password = "Password must contain at least one uppercase letter, one number, and one special character";
         isValid = false;
+    } else {
+      error.password = "";
+      isValid = true;
     }
     if(!values.confirmPassword){
-        errors.confirmPassword = "Confirm password is required!";
+        error.confirmPassword = "Confirm password is required!";
         isValid = false;
     } else if(values.password !== values.confirmPassword){
-        errors.confirmPassword = "Password do not match!";
+        error.confirmPassword = "Password do not match!";
         isValid = false;
+    } else {
+      error.confirmPassword = "";
+      isValid = true;
     }
-    setValues({ ...values, errors: errors });
-    setIsValid(isValid)
+    console.log(error)
+    // setValues({ ...values, errors: error });
+    // setIsValid(isValid)
     return isValid;
   }
 
@@ -87,7 +105,7 @@ const Registration = () => {
     </div>
     
     <div className='submit-btn'>
-    <button type='button' disabled={!isValid}>Submit</button>
+    <button type='button' disabled={!handleFormValidation()}>Submit</button>
     </div>
     </form>
     </div>

@@ -1,12 +1,12 @@
 import './App.css'
-// import Registration from './components/Registration'
-import RegistrationForm from './components/RegistrationForm'
+import Registration from './components/Registration'
+// import { Registration } from './components'
 
 function App() {
 
   return (
     <>
-    <RegistrationForm/>
+    <Registration/>
     </>
   )
 }
